@@ -1,11 +1,37 @@
-import React from "react"
-import {NextPage} from 'next';
- 
- 
-const FirstPost = () => {
-  return (
-    <div>欢迎来到 next.js !</div>
-    
-  )
+
+import React from 'react';
+import { Editor } from '@tinymce/tinymce-react';
+
+class App extends React.Component {
+  handleEditorChange = (e) => {
+    console.log(
+      'Content was updated:',
+      e.target.getContent()
+    );
+  }
+
+  render() {
+    return (
+      <Editor
+        initialValue="<p>Initial content</p>"
+        init={{
+          height: 500,
+          menubar: false,
+          plugins: [
+            'advlist autolink lists link image',
+            'charmap print preview anchor help',
+            'searchreplace visualblocks code',
+            'insertdatetime media table paste wordcount'
+          ],
+          toolbar:
+            'undo redo | formatselect | bold italic | \
+            alignleft aligncenter alignright | \
+            bullist numlist outdent indent | help | link image'
+        }}
+        onChange={this.handleEditorChange}
+      />
+    );
+  }
 }
-export default FirstPost;
+
+export default App;
